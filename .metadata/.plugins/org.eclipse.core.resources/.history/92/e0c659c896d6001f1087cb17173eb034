@@ -1,0 +1,9 @@
+package br.com.cod3r.cm.visao;
+
+public class BotaoCampo {
+
+	public BotaoCampo(Campo campo) {
+		super();
+	}
+	
+}

@@ -1,0 +1,32 @@
+package Projeto.labirinto.modelo;
+
+import java.util.*;
+
+import br.com.cod3r.cm.modelo.Campo;
+
+public class Tabuleiro {
+
+	private int linhas;
+	private int colunas;
+	private int paredes;
+	private final List<Campo> campos = new ArrayList<>();
+	public Tabuleiro(int linhas, int colunas, int paredes) {
+		super();
+		this.linhas = linhas;
+		this.colunas = colunas;
+		this.paredes = paredes;
+		gerarCampos();
+		associarOsVizinhos();
+		sortearParedes();
+	}
+	private void gerarCampos() {
+		for(int i=0; i<linhas; i++) {
+			for(int j=0; j<colunas; j++) {
+				campos.add(new Campo(i,j));
+			}
+		}
+		
+	}
+	
+	
+}

@@ -1,0 +1,25 @@
+package Observer.padrao;
+
+import java.util.*;
+
+public class Porteiro {
+	private List<ChegadaAniversarianteObservador> observadores = new ArrayList<>();
+	public void registrarObservador(ChegadaAniversarianteObservador o) {
+		observadores.add(o);
+	}
+	public void monitorar() {
+		Scanner entrada = new Scanner(System.in);
+		String valor = "";
+		while(!"sair".equalsIgnoreCase(valor)) {
+			System.out.println("Aniversariante chegou ?");
+			valor = entrada.nextLine();
+			if(!"sim".equalsIgnoreCase(valor)) {
+				
+			}else {
+				System.out.println("Alarme falso");
+
+			}
+		}
+	}
+	
+}

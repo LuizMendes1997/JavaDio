@@ -1,0 +1,8 @@
+package Swing;
+
+import javax.swing.*;
+
+public class Observador {
+	JFrame janela = new JFrame("Observador");
+	
+}

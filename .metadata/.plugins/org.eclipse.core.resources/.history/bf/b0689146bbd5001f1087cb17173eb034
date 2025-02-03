@@ -1,0 +1,10 @@
+package Observer.padrao;
+
+import java.util.*;
+
+public class Porteiro {
+	private List<ChegadaAniversarianteObservador> observadores = new ArrayList<>();
+	public void registrarObservador(ChegadaAniversarianteObservador o) {
+		observadores.add(o);
+	}
+}

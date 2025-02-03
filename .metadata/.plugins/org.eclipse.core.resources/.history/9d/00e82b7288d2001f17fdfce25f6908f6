@@ -1,0 +1,9 @@
+package Projeto.labirinto.modelo;
+
+public class Tabuleiro {
+
+	private int linhas;
+	private int colunas;
+	private int paredes;
+	private final List<Campo> campos = new ArrayList<>();
+}

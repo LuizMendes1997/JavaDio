@@ -1,0 +1,7 @@
+package Projeto.labirinto.visao;
+
+import Projeto.labirinto.modelo.Tabuleiro;
+
+public class TabuleiroConsole {
+	private Tabuleiro tabuleiro;
+}

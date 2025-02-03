@@ -1,0 +1,88 @@
+package Projeto.labirinto.visao;
+
+import java.util.*;
+
+import Projeto.labirinto.excecao.SairException;
+import Projeto.labirinto.modelo.Tabuleiro;
+
+public class TabuleiroConsole {
+    private Tabuleiro tabuleiro;
+    private Scanner entrada = new Scanner(System.in);
+
+    public TabuleiroConsole(Tabuleiro tabuleiro) {
+        super();
+        this.tabuleiro = tabuleiro;
+        executarJogo();
+    }
+
+    private void executarJogo() {
+        try {
+            boolean continuar = true;
+
+            // Loop principal do jogo, que continua até o jogador escolher parar
+            while (continuar) {
+                cicloDoJogo(); // Executa uma partida
+                System.out.println("Outra partida? (S/n)");
+                String resposta = entrada.nextLine();
+                if ("n".equalsIgnoreCase(resposta)) {
+                    continuar = false; // Finaliza o jogo se o usuário responder 'n'
+                } else {
+                    tabuleiro.reiniciar(); // Reinicia o jogo se o usuário responder qualquer outra coisa
+                }
+            }
+
+        } catch (SairException e) {
+            System.out.println("Tchau!!!");
+        } finally {
+            entrada.close(); // Fechando o scanner ao final
+        }
+    }
+
+    private void cicloDoJogo() {
+        try {
+            // Loop do jogo até o objetivo ser alcançado
+            while (!tabuleiro.objetivoAlcancado()) {
+                System.out.println(tabuleiro); // Mostra o tabuleiro atual
+
+                // Captura as coordenadas de movimento do usuário
+                String digitado = capturarValorDigitado("Digite (x,y): ");
+                Iterator<Integer> xy = Arrays.stream(digitado.split(","))
+                        .map(e -> Integer.parseInt(e.trim()))
+                        .iterator();
+
+                // Lê as coordenadas (x, y) e tenta abrir o campo correspondente
+                int x = xy.next();
+                int y = xy.next();
+                
+                // Verifica se as coordenadas são válidas
+                if (x >= 0 && x < tabuleiro.getLinhas() && y >= 0 && y < tabuleiro.getColunas()) {
+                    tabuleiro.abrir(x, y);
+                } else {
+                    System.out.println("Coordenadas inválidas, tente novamente.");
+                }
+            }
+
+            // Quando o objetivo for alcançado, informa que o jogador venceu
+            System.out.println(tabuleiro);
+            System.out.println("Você Ganhou!!");
+
+        } catch (SairException e) {
+            System.out.println(tabuleiro);
+            System.out.println("Você perdeu!!");
+        }
+    }
+
+    private String capturarValorDigitado(String texto) {
+        // Captura a entrada do usuário com mensagem customizada
+        System.out.print(texto);
+        String digitado = entrada.nextLine();
+
+        // Verifica se o jogador quer sair do jogo
+        if ("sair".equalsIgnoreCase(digitado)) {
+            throw new SairException();
+        }
+
+        return digitado;
+    }
+}
+

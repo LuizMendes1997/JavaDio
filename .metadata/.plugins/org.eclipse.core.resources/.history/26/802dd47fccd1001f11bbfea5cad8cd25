@@ -1,0 +1,8 @@
+package Projeto.labirinto.modelo;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+public class Tabuleiro {
+
+}

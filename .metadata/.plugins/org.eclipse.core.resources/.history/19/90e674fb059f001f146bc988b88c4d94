@@ -1,0 +1,106 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculadora {
+    // Variáveis para armazenar os valores e operação
+    private double num1, num2, resultado;
+    private String operador;
+
+    public static void main(String[] args) {
+        // Criar uma instância de Calculadora
+        Calculadora calc = new Calculadora();
+        calc.criarCalculadora();
+    }
+
+    // Método para criar a interface da calculadora
+    public void criarCalculadora() {
+        // Criação do JFrame (janela principal)
+        JFrame frame = new JFrame("Calculadora");
+        frame.setSize(300, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        // Display para mostrar os números e resultados
+        JTextField display = new JTextField();
+        display.setEditable(false);
+        display.setHorizontalAlignment(JTextField.RIGHT);
+        display.setFont(new Font("Arial", Font.BOLD, 24));
+
+        // Painel com os botões numéricos e operacionais
+        JPanel painel = new JPanel();
+        painel.setLayout(new GridLayout(4, 4));
+
+        // Botões numéricos e operacionais
+        String[] botoes = {
+            "7", "8", "9", "/",
+            "4", "5", "6", "*",
+            "1", "2", "3", "-",
+            "C", "0", "=", "+"
+        };
+
+        // Adicionar botões ao painel
+        for (String texto : botoes) {
+            JButton button = new JButton(texto);
+            button.setFont(new Font("Arial", Font.PLAIN, 20));
+            painel.add(button);
+
+            // Adiciona um ActionListener para cada botão
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String comando = e.getActionCommand();
+                    if ("C".equals(comando)) {
+                        display.setText("");
+                        num1 = num2 = resultado = 0;
+                        operador = "";
+                    } else if ("=".equals(comando)) {
+                        num2 = Double.parseDouble(display.getText());
+                        calcular(display);
+                    } else if ("+".equals(comando) || "-".equals(comando) || "*".equals(comando) || "/".equals(comando)) {
+                        num1 = Double.parseDouble(display.getText());
+                        operador = comando;
+                        display.setText("");
+                    } else {
+                        display.setText(display.getText() + comando);
+                    }
+                }
+            });
+        }
+
+        // Adiciona o display e o painel de botões à janela
+        frame.add(display, BorderLayout.NORTH);
+        frame.add(painel, BorderLayout.CENTER);
+
+        // Tornar a janela visível
+        frame.setVisible(true);
+    }
+
+    // Método para calcular o resultado
+    public void calcular(JTextField display) {
+        switch (operador) {
+            case "+":
+                resultado = num1 + num2;
+                break;
+            case "-":
+                resultado = num1 - num2;
+                break;
+            case "*":
+                resultado = num1 * num2;
+                break;
+            case "/":
+                if (num2 != 0) {
+                    resultado = num1 / num2;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não é possível dividir por zero");
+                    resultado = 0;
+                }
+                break;
+            default:
+                break;
+        }
+        display.setText(String.valueOf(resultado));
+    }
+}
+
+

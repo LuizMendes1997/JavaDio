@@ -1,0 +1,15 @@
+package Observer.padrao;
+
+public class EventoChegadaAniversariante {
+	private final Date momento;
+
+	public EventoChegadaAniversariante(Date momento) {
+		super();
+		this.momento = momento;
+	}
+
+	public date getMomento() {
+		return momento;
+	}
+	
+}

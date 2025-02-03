@@ -1,0 +1,17 @@
+package br.com.cod3r.cm.visao;
+
+import java.awt.HeadlessException;
+
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class TelaPrincipal extends JFrame {
+	
+	public TelaPrincipal() throws HeadlessException {
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		
+	}
+}

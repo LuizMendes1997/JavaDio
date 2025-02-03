@@ -1,0 +1,115 @@
+package TP03;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculadora {
+    // Variáveis para armazenar os valores e operação
+    private double num1, num2, resultado;
+    private String operador;
+
+    public static void main(String[] args) {
+        // Criar uma instância de Calculadora
+        Calculadora calc = new Calculadora();
+        calc.criarCalculadora();
+    }
+
+    // Método para criar a interface da calculadora
+    public void criarCalculadora() {
+        // Criação do JFrame (janela principal)
+        JFrame frame = new JFrame("Calculadora");
+        frame.setSize(300, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.setResizable(false);  // Impede que a janela seja redimensionada
+
+        // Criar um JPanel para adicionar a borda azul clara
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBorder(BorderFactory.createLineBorder(Color.CYAN, 10)); // Borda azul clara (Cyan)
+
+        // Display para mostrar os números e resultados
+        JTextField display = new JTextField();
+        display.setEditable(false);
+        display.setHorizontalAlignment(JTextField.RIGHT);
+        display.setFont(new Font("Arial", Font.BOLD, 24));
+
+        // Painel com os botões numéricos e operacionais
+        JPanel painel = new JPanel();
+        painel.setLayout(new GridLayout(5, 4));  // 5 linhas e 4 colunas
+
+        // Botões numéricos e operacionais
+        String[] botoes = {
+            "7", "8", "9", "/",
+            "4", "5", "6", "*",  // O botão * sem o fundo vermelho
+            "1", "2", "3", "-",
+            "0", ".", "=", "+",
+            "C"  // Linha extra para o botão de limpar
+        };
+
+        // Adicionar botões ao painel
+        for (String texto : botoes) {
+            JButton button = new JButton(texto);
+            button.setFont(new Font("Arial", Font.PLAIN, 20));
+            painel.add(button);
+
+            // Adiciona um ActionListener para cada botão
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    String comando = e.getActionCommand();
+                    if ("C".equals(comando)) {
+                        display.setText("");
+                        num1 = num2 = resultado = 0;
+                        operador = "";
+                    } else if ("=".equals(comando)) {
+                        num2 = Double.parseDouble(display.getText());
+                        calcular(display);
+                    } else if ("+".equals(comando) || "-".equals(comando) || "*".equals(comando) || "/".equals(comando)) {
+                        num1 = Double.parseDouble(display.getText());
+                        operador = comando;
+                        display.setText("");
+                    } else {
+                        display.setText(display.getText() + comando);
+                    }
+                }
+            });
+        }
+
+        // Adiciona o display e o painel de botões à janela
+        panel.add(display, BorderLayout.NORTH);
+        panel.add(painel, BorderLayout.CENTER);
+
+        // Adiciona o JPanel com a borda azul clara ao JFrame
+        frame.add(panel);
+
+        // Tornar a janela visível
+        frame.setVisible(true);
+    }
+
+    // Método para calcular o resultado
+    public void calcular(JTextField display) {
+        switch (operador) {
+            case "+":
+                resultado = num1 + num2;
+                break;
+            case "-":
+                resultado = num1 - num2;
+                break;
+            case "*":
+                resultado = num1 * num2;
+                break;
+            case "/":
+                if (num2 != 0) {
+                    resultado = num1 / num2;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não é possível dividir por zero");
+                    resultado = 0;
+                }
+                break;
+            default:
+                break;
+        }
+        display.setText(String.valueOf(resultado));
+    }
+}

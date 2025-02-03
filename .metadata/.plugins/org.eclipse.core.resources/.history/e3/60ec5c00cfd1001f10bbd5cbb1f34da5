@@ -1,0 +1,11 @@
+package Projeto.labirinto.visao;
+
+import java.util.*;
+
+import Projeto.labirinto.excecao.SairException;
+import Projeto.labirinto.modelo.Tabuleiro;
+
+public class TabuleiroConsole {
+   
+}
+

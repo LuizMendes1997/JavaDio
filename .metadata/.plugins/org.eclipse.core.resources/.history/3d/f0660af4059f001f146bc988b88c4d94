@@ -1,0 +1,103 @@
+package TP03;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Calculadora  {
+    public static void main(String[] args) {
+        // Criação do JFrame (janela)
+        JFrame frame = new JFrame("Calculadora");
+        frame.setSize(400, 300);  // Tamanho da janela
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Fechar o aplicativo quando a janela for fechada
+        frame.setLayout(new FlowLayout());
+
+        // Criação dos componentes
+        JTextField num1Field = new JTextField(10);  // Campo de texto para o primeiro número
+        JTextField num2Field = new JTextField(10);  // Campo de texto para o segundo número
+        JTextField resultField = new JTextField(10);  // Campo de texto para o resultado
+        resultField.setEditable(false);  // O campo de resultado é apenas para exibição
+
+        JButton addButton = new JButton("+");
+        JButton subButton = new JButton("-");
+        JButton mulButton = new JButton("*");
+        JButton divButton = new JButton("/");
+
+        // Adicionar componentes ao frame
+        frame.add(new JLabel("Número 1:"));
+        frame.add(num1Field);
+        frame.add(new JLabel("Número 2:"));
+        frame.add(num2Field);
+        frame.add(new JLabel("Resultado:"));
+        frame.add(resultField);
+        frame.add(addButton);
+        frame.add(subButton);
+        frame.add(mulButton);
+        frame.add(divButton);
+
+        // Ações para os botões
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calcular(num1Field, num2Field, resultField, "add");
+            }
+        });
+
+        subButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calcular(num1Field, num2Field, resultField, "sub");
+            }
+        });
+
+        mulButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calcular(num1Field, num2Field, resultField, "mul");
+            }
+        });
+
+        divButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                calcular(num1Field, num2Field, resultField, "div");
+            }
+        });
+
+        // Exibir a janela
+        frame.setVisible(true);
+    }
+
+    // Método para realizar o cálculo
+    public static void calcular(JTextField num1Field, JTextField num2Field, JTextField resultField, String operacao) {
+        try {
+            double num1 = Double.parseDouble(num1Field.getText());
+            double num2 = Double.parseDouble(num2Field.getText());
+            double resultado = 0;
+
+            switch (operacao) {
+                case "add":
+                    resultado = num1 + num2;
+                    break;
+                case "sub":
+                    resultado = num1 - num2;
+                    break;
+                case "mul":
+                    resultado = num1 * num2;
+                    break;
+                case "div":
+                    if (num2 == 0) {
+                        JOptionPane.showMessageDialog(null, "Não é possível dividir por zero!");
+                        return;
+                    }
+                    resultado = num1 / num2;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Operação inválida.");
+                    return;
+            }
+
+            resultField.setText(String.valueOf(resultado));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, insira números válidos.");
+        }
+    }
+}
+
+

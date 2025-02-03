@@ -1,0 +1,6 @@
+package br.com.cod3r.cm;
+
+public class Aplicacao {
+	Tabuleiro tabuleiro = new Tabuleiro(6,6,6);
+	System.out.println(tabuleiro);
+}

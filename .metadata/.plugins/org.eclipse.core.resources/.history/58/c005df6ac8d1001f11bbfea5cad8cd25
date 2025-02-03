@@ -1,0 +1,104 @@
+package Projeto.labirinto.modelo;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+public class Tabuleiro {
+    private int linhas;
+    private int colunas;
+    private int parede;
+    private final List<Campo> campos = new ArrayList<>();
+
+    public Tabuleiro(int linhas, int colunas, int parede) {
+        this.linhas = linhas;
+        this.colunas = colunas;
+        this.parede = parede;
+        gerarCampos();
+        associarOsVizinhos();
+        sortearParede();
+    }
+
+    // Método para obter a quantidade de linhas do tabuleiro
+    public int getLinhas() {
+        return linhas;
+    }
+
+    // Método para obter a quantidade de colunas do tabuleiro
+    public int getColunas() {
+        return colunas;
+    }
+
+    // Gerar todos os campos no tabuleiro
+    private void gerarCampos() {
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                campos.add(new Campo(i, j));
+            }
+        }
+    }
+
+    // Associar os vizinhos corretamente
+    private void associarOsVizinhos() {
+        for (Campo c1 : campos) {
+            for (Campo c2 : campos) {
+                c1.adicionarVizinho(c2);
+            }
+        }
+    }
+
+    // Sortear as paredes no tabuleiro
+    private void sortearParede() {
+        long ParedesFeitas = 0;
+        Predicate<Campo> paredao = c -> c.isParede();
+
+        do {
+            int aleatorio = (int) (Math.random() * campos.size());
+            campos.get(aleatorio).parede();
+            ParedesFeitas = campos.stream().filter(paredao).count();
+        } while (ParedesFeitas < parede);
+    }
+
+    // Verifica se o objetivo foi alcançado
+    public boolean objetivoAlcancado() {
+        return campos.stream().allMatch(Campo::objetivoAlcancado);
+    }
+
+    // Reinicia o tabuleiro (redefine todos os campos)
+    public void reiniciar() {
+        campos.forEach(Campo::reiniciar);
+        sortearParede();
+    }
+
+    // Abre o campo específico (linha, coluna)
+    public void abrir(int linha, int coluna) {
+        campos.stream()
+                .filter(c -> c.getLinha() == linha && c.getColuna() == coluna)
+                .findFirst()
+                .ifPresent(Campo::abrir);
+    }
+
+    // Representação do tabuleiro
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("  ");
+        for (int c = 0; c < colunas; c++) {
+            sb.append(" ");
+            sb.append(c);
+            sb.append(" ");
+        }
+        sb.append("\n");
+        int i = 0;
+        for (int l = 0; l < linhas; l++) {
+            sb.append(l);
+            sb.append(" ");
+            for (int c = 0; c < colunas; c++) {
+                sb.append(" ");
+                sb.append(campos.get(i));
+                sb.append(" ");
+                i++;
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+}

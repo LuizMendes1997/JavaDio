@@ -1,0 +1,74 @@
+package Projeto.labirinto.modelo;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Campo {
+	private boolean aberto = false;
+	private boolean parede = false;
+	private boolean personagem = false;
+	
+	private final int linha;
+	private final int coluna;
+	
+	private List<Campo> vizinhos = new ArrayList<>();
+	
+	boolean adicionarVizinho(Campo vizinho) {
+		int deltaLinha = Math.abs(linha - vizinho.linha);
+		int deltaColuna = Math.abs(coluna - vizinho.coluna);
+		int deltaGeral = deltaColuna + deltaLinha;
+		
+		if(deltaGeral == 1 ) {
+			vizinhos.add(vizinho);
+			return true;
+		}
+		else { return false;}
+	}
+	Campo(int linha, int coluna){
+		this.linha= linha;
+		this.coluna= coluna;
+}
+	boolean abrir() {
+	    if (!aberto) {
+	        aberto = true;
+	        for (Campo vizinho : vizinhos) {
+	                vizinho.abrir(); 
+	                }
+	        return true;
+	    } else {
+	        return false;
+}	}
+
+	
+	void setAberto(boolean aberto) {
+		this.aberto = aberto;
+	}
+	public boolean isAberto() {
+		return aberto;
+	}
+	public boolean isFechado() {
+		return !isAberto();	}
+	public int getLinha() {
+		return linha;
+	}
+	public int getColuna() {
+		return coluna;
+	}
+	void reiniciar() {
+		aberto = false;
+		parede = false;
+	}
+	public String toString() {
+		if(parede) {
+			return "||";
+}
+		else if(aberto) {
+			return " ";
+}
+		else {
+			return "?";
+}}
+	public Object isParede() {
+		return parede;
+	}}
+

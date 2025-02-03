@@ -1,0 +1,46 @@
+package Projeto.labirinto.modelo;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+import br.com.cod3r.cm.modelo.Campo;
+
+public class Tabuleiro {
+
+	private int linhas;
+	private int colunas;
+	private int paredes;
+	private final List<Campo> campos = new ArrayList<>();
+	public Tabuleiro(int linhas, int colunas, int paredes) {
+		super();
+		this.linhas = linhas;
+		this.colunas = colunas;
+		this.paredes = paredes;
+		gerarCampos();
+		associarOsVizinhos();
+		sortearParedes();
+	}
+	private void gerarCampos() {
+		for(int i=0; i<linhas; i++) {
+			for(int j=0; j<colunas; j++) {
+				campos.add(new Campo(i,j));
+			}}}
+	private void associarOsVizinhos() {
+		for(Campo c1: campos) {
+			for(Campo c2: campos) {
+				c1.adicionarVizinho(c2);
+			}}}
+	private void sortearParedes() {
+		long p =0;
+		Predicate<Campo> murado = c -> c.isMurado();
+		
+		do {
+			int aleatorio = (int) (Math.random() * campos.size());
+			campos.get(aleatorio).murar();
+			minasArmadas = campos.stream().filter(murado).count();
+		}while(minasArmadas < paredes);
+		
+	}
+	
+	
+}

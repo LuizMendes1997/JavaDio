@@ -1,0 +1,116 @@
+package Projeto.labirinto.modelo;
+
+import java.util.*;
+
+public class Campo {
+	private boolean aberto = false;
+	private boolean murado = false;
+	private boolean personagem = false;
+	private final int coluna;
+	private final int linha;
+	private List<Campo> vizinhos = new ArrayList<>();
+	
+	boolean adicionarVizinho (Campo vizinho) {
+		int deltaLinha = Math.abs(linha - vizinho.linha);
+		int deltaColuna = Math.abs(coluna - vizinho.coluna);
+		
+		int deltaGeral = deltaLinha + deltaColuna;
+		
+		if(deltaGeral ==1) {
+			vizinhos.add(vizinho);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public Campo(int coluna, int linha) {
+		super();
+		this.coluna = coluna;
+		this.linha = linha;
+	}
+	boolean ladonaoMurado() {
+		return vizinhos.stream().noneMatch(v -> v.murado);
+	}
+	boolean abrir() {
+	    if (!aberto && !murado) {
+	        // Marca o campo como aberto
+	        aberto = true;
+	        personagem = true;
+	        // Abre os vizinhos, se não estiverem murados e não estiverem abertos
+	        vizinhos.forEach(v -> {
+	            if (!v.isAberto()) {
+	                v.setAberto(true);  // Marca o vizinho como aberto
+	            }
+	        });
+	        
+	        return true; // Retorna verdadeiro indicando que o campo foi aberto
+	        
+	    } 
+	    if (aberto && !murado) {
+	        // Marca o campo como aberto
+	        aberto = true;
+	        personagem = true;
+	        // Abre os vizinhos, se não estiverem murados e não estiverem abertos
+	        vizinhos.forEach(v -> {
+	            if (!v.isAberto()) {
+	                v.setAberto(true);  // Marca o vizinho como aberto
+	            }
+	        });
+	        
+	        return true; // Retorna verdadeiro indicando que o campo foi aberto
+	        
+	    }
+	    else if (murado) {
+	        // Caso o campo esteja murado, não pode ser aberto
+	        System.out.println("Este campo está bloqueado! Não é possível abrir.");
+	        return false;
+	    } else {
+	        return false; // Se o campo já estava aberto, não faz nada
+	    }
+	}
+
+	void murar() {
+		murado = true;
+	}
+	void setAberto(boolean aberto) {
+		this.aberto = aberto;
+	}
+	 public void removerPersonagem() {
+	        personagem = false;  // Remove o personagem desse campo
+	    }
+	public boolean isAberto() {
+		return aberto;
+	}
+	public boolean isMurado() {
+		return murado;
+	}
+	void colocarPersonagem() {
+		personagem = true;
+	}
+	public boolean isPersonagem() {
+		return personagem;
+	}
+	public boolean isFechado() {
+		return !isAberto();	}
+	public int getLinha() {
+		return linha;
+	}
+	public int getColuna() {
+		return coluna;
+	}
+
+	void reiniciar() {
+		aberto = false;
+		murado = false;
+		personagem = false;
+	}
+	public String toString() {
+		if (aberto && murado) {return "#";}
+		else if(personagem && aberto) {return "0";}
+		else if(aberto) {return " ";}
+		else {return "¨";}
+	}
+	
+}

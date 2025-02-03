@@ -1,0 +1,12 @@
+package Projeto.labirinto.modelo;
+
+import java.util.*;
+
+public class Campo {
+	private boolean aberto = false;
+	private boolean paredeMontada = false;
+	
+	private final int coluna;
+	private final int linha;
+	private List<Campo> vizinhos = new ArrayList<>();
+}

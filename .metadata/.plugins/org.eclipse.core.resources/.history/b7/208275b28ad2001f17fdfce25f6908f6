@@ -1,0 +1,8 @@
+package Projeto.labirinto.visao;
+
+import Projeto.labirinto.modelo.Tabuleiro;
+
+public class TabuleiroConsole {
+	private Tabuleiro tabuleiro;
+	private Scanner entrada = new Scanner(System.in);
+}

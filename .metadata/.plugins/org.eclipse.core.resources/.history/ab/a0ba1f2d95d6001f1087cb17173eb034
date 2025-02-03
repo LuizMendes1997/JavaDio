@@ -1,0 +1,20 @@
+package br.com.cod3r.cm.visao;
+
+import java.awt.HeadlessException;
+
+import javax.swing.*;
+
+@SuppressWarnings("serial")
+public class TelaPrincipal extends JFrame {
+	
+	public TelaPrincipal() throws HeadlessException {
+		setTitle("Campo Minado");
+		setSize(690,438);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		
+	}
+}
