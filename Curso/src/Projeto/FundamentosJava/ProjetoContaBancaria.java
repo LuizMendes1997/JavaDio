@@ -1,30 +1,22 @@
 package Projeto.FundamentosJava;
 
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class ProjetoContaBancaria {
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
-		
-		String nome; double saldo; String agencia; int numero;
-		
-		System.out.println("Digite seu nome:" );
-		nome = scanner.next();
-		
-		System.out.println("Digite a sua agencia:");
-		agencia = scanner.next();
-		
-		System.out.println("Digite o numero da sua agencia:");
-		numero = Integer.parseInt(scanner.next());
-		
-		System.out.println("Digite o saldo da sua conta:");
-		saldo = Double.parseDouble(scanner.next());
-		
-		System.out.println("Ola " + nome +" obrigado por criar uma conta em nosso banco, sua agencia é " + agencia+", conta "+numero+" e seu saldo " +saldo+" ja está disponivel para saque.");
 	
+		Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
+	
+		String[] nomes = new String[10];
 		
-		
-		
-	}
-}
+		for(int i=0 ; i<10 ; i++){
+			  i = 2;
+		nomes[i] = scanner.nextLine();
+	      System.out.println(nomes[i]);
+	      i = i++;
+		}
+}}
+	
+

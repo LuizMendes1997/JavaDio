@@ -1,0 +1,7 @@
+package Projeto.Candidatura;
+public class NumeroMenorQueOutroException extends Exception {
+    // Construtor com mensagem
+    public NumeroMenorQueOutroException(String message) {
+        super(message);
+    }
+}

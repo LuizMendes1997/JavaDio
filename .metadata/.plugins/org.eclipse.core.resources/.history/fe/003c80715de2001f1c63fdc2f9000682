@@ -1,0 +1,19 @@
+package Projeto.Candidatura;
+
+public class ProcessoSeletivo {
+	public static void main(String[] args) {
+		System.out.println("Processo seletivo");
+	}
+	static void analisarCandidato(double salarioPretendido) {
+		double salarioBase = 2000.0;
+		if(salarioBase > salarioPretendido) {
+			System.out.println("Ligar para nosso candidato");
+		}
+		else if(salarioBase==salarioPretendido){
+			System.out.println("Ligar com uma contraproposta");
+		}
+		else {
+			System.out.println("Aguardando o resultado dos demais candidatos");
+		}
+	}
+}

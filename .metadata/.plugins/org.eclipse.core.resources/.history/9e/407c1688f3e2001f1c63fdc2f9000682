@@ -1,0 +1,32 @@
+package Projeto.Contador;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Contador {
+
+    // Método que realiza a contagem se o número 1 for maior que o número 2
+    public static void contar(int num1, int num2) throws NumeroMenorQueOutroException {
+        if (num1 <= num2) {
+            // Lança a exceção personalizada se o primeiro número não for maior
+            throw new NumeroMenorQueOutroException("O primeiro número deve ser maior que o segundo para contar!");
+        }
+
+        // Se num1 for maior que num2, conta do num1 até num2
+        System.out.println("Contagem de " + num1 + " até " + num2 + ":");
+        for (int i = num1; i >= num2; i--) {
+            System.out.println(i);
+        }
+    }
+
+    public static void main(String[] args) {
+        int numero1 = 10;
+        int numero2 = 5;
+
+        try {
+            contar(numero1, numero2);
+        } catch (NumeroMenorQueOutroException e) {
+            System.err.println("Erro: " + e.getMessage());
+        }
+    }
+}

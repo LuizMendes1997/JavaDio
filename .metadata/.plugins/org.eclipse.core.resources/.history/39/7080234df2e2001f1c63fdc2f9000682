@@ -1,0 +1,36 @@
+package Projeto.Contador;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Contador {
+	public static void main(String[] args) {
+		int numero1; int numero2;
+		public Scanner scanner = new  Scanner(System.in).useLocale(Locale.US);
+		
+		System.out.print("Digite o primeiro numero: ");
+		numero1 = Integer.parseInt(scanner.next());
+		System.out.print("Digite o segundo numero: ");
+		numero2 = Integer.parseInt(scanner.next());
+		
+	}
+	static void contando(int n1, int n2) {
+		if(n1 > n2) {
+			System.out.println("Favor tentar novamente com o primeiro maior que o segundo: ");
+			System.out.print("Digite o primeiro numero: ");
+			Scanner scanner = null;
+			n1 = Integer.parseInt(scanner.next());
+			System.out.print("Digite o segundo numero: ");
+			n2 = Integer.parseInt(scanner.next());
+			for(int x = n1; x <=n2; x++ ) {
+				System.out.println(x);
+			}}
+			else {
+				for(int x = n1; x <=n2; x++ ) {
+					System.out.println(x);
+				}
+			}
+	}
+
+}
+

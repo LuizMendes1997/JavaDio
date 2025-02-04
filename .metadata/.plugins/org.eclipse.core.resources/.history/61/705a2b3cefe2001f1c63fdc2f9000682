@@ -1,0 +1,11 @@
+package Projeto.Contador;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Contador {
+	public static void main(String[] args) {
+		int numero1; int numero2;
+		Scanner scanner = new  Scanner(System.in).useLocale(Locale.US);
+	}
+}
